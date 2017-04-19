@@ -1,15 +1,12 @@
 package org.example.vertx.config;
 
-import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
-import io.vertx.core.json.Json;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.example.vertx.web.controller.v1.FooController;
-import org.example.vertx.web.controller.v1.dto.FooDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
-import java.util.Optional;
 
 @Configuration
 public class WebConfig {
@@ -44,10 +40,15 @@ public class WebConfig {
     }
 
     @Bean
-    public Route fooRoute() {
-        return router().route("/foos").method(HttpMethod.POST).handler(routingContext -> {
-            fooControllerV1().createFoo(routingContext);
-        });
+    public Route findAllFoosRoute() {
+        return router().route(HttpMethod.GET, "/foos")
+                .handler(routingContext -> fooControllerV1().findAll(routingContext));
+    }
+
+    @Bean
+    public Route createFooRoute() {
+        return router().route(HttpMethod.POST, "/foos")
+                .handler(routingContext -> fooControllerV1().create(routingContext));
     }
 
     @Bean
