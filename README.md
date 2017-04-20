@@ -1,6 +1,6 @@
 ## Description
 
-Sample RESTful microservice using Vert.x web for the web layer and Spring Boot for the rest.
+Sample RESTful microservice using Vert.x web for the web layer and Spring Boot for the rest (logging, properties, DI etc.).
 
 ## Build and run the app
 
