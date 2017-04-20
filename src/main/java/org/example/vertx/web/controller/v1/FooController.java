@@ -37,8 +37,6 @@ public class FooController {
 
     public void findAll(RoutingContext routingContext) {
         Collection<Foo> allFoos = fooService.findAll();
-        System.out.println("----");
-        System.out.println(allFoos);
         Collection<FooDTO> allFooDTOs = allFoos.stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
